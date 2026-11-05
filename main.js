@@ -1,3 +1,4 @@
+import { getForecast } from "./api.js";
 // main.js — 화면 담당. P1 ~ P5, P7 에서 이어서 채웁니다.
 //
 // 상황: index.html 에 폼과 빈 표가 있고, 이 파일이 <script type="module"> 로 연결되어 있습니다.
@@ -28,9 +29,18 @@ const rowsEl = document.querySelector("#rows");
 
 statusEl.textContent = "Pick a city and press Check.";
 
-form.addEventListener("submit", (event) => {
+form.addEventListener("submit", async (event) => {
   event.preventDefault();
   const city = CITIES[citySelect.value];
+
   statusEl.textContent = "Loading...";
-  console.log(city);
+  statusEl.classList.remove("error");
+  try{
+    const daily = await getForecast(city);
+    statusEl.textContent = "";
+    console.log(daily);
+  } catch(err) {
+    statusEl.textContent = `Could not load the forecast (${err.message}).`;
+    statusEl.classList.add("error");
+  }
 });
