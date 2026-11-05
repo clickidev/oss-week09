@@ -21,7 +21,7 @@ const CITIES = {
 const form = document.querySelector("#run-form");
 const citySelect = document.querySelector("#city");
 const rainInput = document.querySelector("#rain-limit");
-const windInput = document.querySelector("wind-limit");
+const windInput = document.querySelector("#wind-limit");
 const statusEl = document.querySelector("#status");
 const summaryEl = document.querySelector("#summary");
 const rowsEl = document.querySelector("#rows");
@@ -33,4 +33,4 @@ form.addEventListener("submit", (event) => {
   const city = CITIES[citySelect.value];
   statusEl.textContent = "Loading...";
   console.log(city);
-})
+});
