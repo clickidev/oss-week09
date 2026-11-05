@@ -60,6 +60,11 @@ function render() {
   rowsEl.replaceChildren(...state.days.map(dayRow));
 }
 
+function onLimitsInput() {
+  state.limits = { rain: Number(rainInput.value), wind: Number(windInput.value) };
+  render();
+}
+
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
   const city = CITIES[citySelect.value];
@@ -78,3 +83,6 @@ form.addEventListener("submit", async (event) => {
   }
   render();
 });
+
+rainInput.addEventListener("input", onLimitsInput);
+windInput.addEventListener("input", onLimitsInput);
